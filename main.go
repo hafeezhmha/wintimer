@@ -128,8 +128,8 @@ const (
 )
 
 var rootCmd = &cobra.Command{
-	Use:          "timer",
-	Short:        "timer is like sleep, but with progress report",
+	Use:          "WinTimer",
+	Short:        "WinTimer is like sleep, but with progress report",
 	Version:      version,
 	SilenceUsage: true,
 	Args:         cobra.ExactArgs(1),

@@ -1,108 +1,99 @@
-<p align="center">
-	<img src="https://vhs.charm.sh/vhs-1q9uo4hkLStOL4UHZFfQ4W.gif" alt="Made with VHS">
-	<a href="https://vhs.charm.sh">
-		<img src="https://stuff.charm.sh/vhs/badge.svg">
-	</a>
-	<br>
-	<h1 align="center">timer</h1>
-	<p align="center">A <code>sleep</code> with progress.</p>
-</p>
+# WinTimer
 
----
+```
+ █     █░ ██▓ ███▄    █ ▄▄▄█████▓ ██▓ ███▄ ▄███▓▓█████  ██▀███  
+▓█░ █ ░█░▓██▒ ██ ▀█   █ ▓  ██▒ ▓▒▓██▒▓██▒▀█▀ ██▒▓█   ▀ ▓██ ▒ ██▒
+▒█░ █ ░█ ▒██▒▓██  ▀█ ██▒▒ ▓██░ ▒░▒██▒▓██    ▓██░▒███   ▓██ ░▄█ ▒
+░█░ █ ░█ ░██░▓██▒  ▐▌██▒░ ▓██▓ ░ ░██░▒██    ▒██ ▒▓█  ▄ ▒██▀▀█▄  
+░░██▒██▓ ░██░▒██░   ▓██░  ▒██▒ ░ ░██░▒██▒   ░██▒░▒████▒░██▓ ▒██▒
+░ ▓░▒ ▒  ░▓  ░ ▒░   ▒ ▒   ▒ ░░   ░▓  ░ ▒░   ░  ░░░ ▒░ ░░ ▒▓ ░▒▓░
+  ▒ ░ ░   ▒ ░░ ░░   ░ ▒░    ░     ▒ ░░  ░      ░ ░ ░  ░  ░▒ ░ ▒░
+  ░   ░   ▒ ░   ░   ░ ░   ░       ▒ ░░      ░      ░     ░░   ░ 
+    ░     ░           ░           ░         ░      ░  ░   ░     
+```
 
-Timer is a small CLI, similar to the `sleep` everyone already knows and love,
-with a couple of extra features:
+A Windows countdown timer with progress bar visualization.
 
-- a progress bar indicating the progression of said timer
-- a timer showing how much time is left
-- named timers
+*Inspired by [@bashbunni](https://github.com/bashbunni)*
+
+## Building from Source
+
+1. Make sure you have Go installed on your Windows machine. You can download it from [golang.org](https://golang.org/dl/).
+
+2. Clone the repository and navigate to the project directory
+
+3. Build the application:
+   ```
+   go build -o WinTimer.exe .
+   ```
+
+## Generating Man Pages
+
+To generate man pages on Windows:
+
+1. Using Command Prompt:
+   ```
+   scripts\manpages.bat
+   ```
+
+2. Using PowerShell:
+   ```
+   .\scripts\manpages.ps1
+   ```
+
+## Generating Shell Completions
+
+To generate shell completions on Windows:
+
+1. Using Command Prompt:
+   ```
+   scripts\completions.bat
+   ```
+
+2. Using PowerShell:
+   ```
+   .\scripts\completions.ps1
+   ```
 
 ## Usage
 
-```sh
-timer <duration>
-timer -n <name> <duration>
-man timer
-timer --help
+WinTimer provides a visual countdown with a progress bar:
+
+```
+WinTimer.exe <duration>
+WinTimer.exe -n <name> <duration>
+WinTimer.exe --help
+```
+
+Examples:
+```
+WinTimer.exe 5s         # Run a 5-second timer
+WinTimer.exe 2m         # Run a 2-minute timer
+WinTimer.exe -n "Coffee" 3m  # Run a 3-minute timer labeled "Coffee"
+WinTimer.exe --format 24h 1m  # Use 24-hour time format
 ```
 
 It is possible to pass a time unit for `<duration>`.
-
 Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 If no unit is passed, it defaults to seconds ("s").
 
-If you want to show the start time in 24-hour format, use `--format 24h`. For
-example:
-```sh
-timer 5s --format 24h -n Demo
-```
-Currently, the two formats supported by the `--format` option are:
-- `kitchen`: the default, example: `9:16PM`.
-- `24h`: 24-hour time format, example: `21:16`.
+## Notes
 
-## Install
+- The shell completion files are primarily useful if you're using Git Bash, WSL, or other Unix-like environments on Windows
+- Man pages are not typically used on Windows, but are generated for compatibility with Unix-like environments
 
-**homebrew**:
+## Installation
 
-```sh
-brew install caarlos0/tap/timer
-```
+After building or downloading WinTimer.exe, you might want to:
 
-**macports**:
+1. Add the directory containing `WinTimer.exe` to your PATH environment variable
+2. Create a shortcut to `WinTimer.exe` in a convenient location
 
-```sh
-sudo port install timer
-```
+## Acknowledgments
 
-**snap**:
+Special thanks to [@bashbunni](https://github.com/bashbunni) for the inspiration behind this project.
 
-```sh
-snap install timer
-```
-
-**apt**:
-
-```sh
-echo 'deb [trusted=yes] https://repo.caarlos0.dev/apt/ /' | sudo tee /etc/apt/sources.list.d/caarlos0.list
-sudo apt update
-sudo apt install timer
-```
-
-**yum**:
-
-```sh
-echo '[caarlos0]
-name=caarlos0
-baseurl=https://repo.caarlos0.dev/yum/
-enabled=1
-gpgcheck=0' | sudo tee /etc/yum.repos.d/caarlos0.repo
-sudo yum install timer
-```
-
-**arch linux**:
-
-```sh
-yay -S timer-bin
-```
-
-**deb/rpm/apk**:
-
-Download the `.apk`, `.deb` or `.rpm` from the [releases page][releases] and install with the appropriate commands.
-
-**manually**:
-
-Download the pre-compiled binaries from the [releases page][releases] or clone the repo build from source.
-
-[releases]:  https://github.com/caarlos0/timer/releases
-
-# Badges
-
-[![Release](https://img.shields.io/github/release/caarlos0/timer.svg?style=for-the-badge)](https://github.com/caarlos0/timer/releases/latest)
-
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=for-the-badge)](LICENSE.md)
-
-[![Build](https://img.shields.io/github/actions/workflow/status/caarlos0/timer/build.yml?style=for-the-badge)](https://github.com/caarlos0/timer/actions?query=workflow%3Abuild)
-
-[![Go Report Card](https://goreportcard.com/badge/github.com/caarlos0/timer?style=for-the-badge)](https://goreportcard.com/report/github.com/caarlos0/timer)
-
-[![Powered By: GoReleaser](https://img.shields.io/badge/powered%20by-goreleaser-green.svg?style=for-the-badge)](https://github.com/goreleaser)
+This project utilizes the wonderful terminal UI libraries from [Charm](https://github.com/charmbracelet), where bashbunni contributes:
+- [bubbletea](https://github.com/charmbracelet/bubbletea) - A powerful TUI framework
+- [lipgloss](https://github.com/charmbracelet/lipgloss) - Style definitions for terminal layouts
+- [bubbles](https://github.com/charmbracelet/bubbles) - TUI components 
